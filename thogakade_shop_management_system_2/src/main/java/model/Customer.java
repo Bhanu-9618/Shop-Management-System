@@ -1,7 +1,5 @@
 package model;
-
 import lombok.*;
-
 import java.util.Date;
 
 @ToString
@@ -9,7 +7,6 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Customer {
 
     private String id;

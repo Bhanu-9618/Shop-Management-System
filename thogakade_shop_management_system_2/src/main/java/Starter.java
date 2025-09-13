@@ -7,7 +7,6 @@ import javafx.stage.Stage;
         public static void main(String[] args) {
             launch();
         }
-
         @Override
         public void start(Stage stage) throws Exception {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/MainWindow.fxml"))));
