@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="354.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainWindowController">
+   <children>
+      <JFXButton fx:id="custmanagebtn" layoutX="153.0" layoutY="66.0" onAction="#custmanagebtnOnaction" prefHeight="39.0" prefWidth="246.0" text="Customer Management">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="itemmanagebtn" layoutX="153.0" layoutY="127.0" onAction="#itemmanagebtnOnaction" prefHeight="39.0" prefWidth="246.0" text="Item Management">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="ordermanagebtn" layoutX="153.0" layoutY="183.0" onAction="#ordermanagebtnOnaction" prefHeight="39.0" prefWidth="246.0" text="Order Management">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="orderdetailmanagebtn" layoutX="153.0" layoutY="245.0" onAction="#orderdetailmanagebtnOnaction" prefHeight="39.0" prefWidth="246.0" text="Order Detail Management">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
