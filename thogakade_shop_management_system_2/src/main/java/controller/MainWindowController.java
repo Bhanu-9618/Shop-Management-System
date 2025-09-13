@@ -23,6 +23,7 @@ public class MainWindowController {
     @FXML
     private JFXButton ordermanagebtn;
 
+
     Stage stage = new Stage();
 
     public void custmanagebtnOnaction(javafx.event.ActionEvent event) {

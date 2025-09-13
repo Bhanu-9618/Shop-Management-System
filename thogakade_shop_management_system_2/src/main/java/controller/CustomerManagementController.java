@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,6 +49,12 @@ public class CustomerManagementController {
     private TableColumn<?, ?> colcustTitle;
 
     @FXML
+    private JFXComboBox<?> comboprovince;
+
+    @FXML
+    private JFXComboBox<?> combotitle;
+
+    @FXML
     private JFXTextArea txtcustaddress;
 
     @FXML
@@ -66,13 +73,7 @@ public class CustomerManagementController {
     private JFXTextArea txtcustpostalcode;
 
     @FXML
-    private JFXTextArea txtcustprovince;
-
-    @FXML
     private JFXTextArea txtcustsalary;
-
-    @FXML
-    private JFXTextArea txtcusttitle;
 
     public void btnaddcustOnaction(ActionEvent event) {
     }
