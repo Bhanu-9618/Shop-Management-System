@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="495.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerManagementController">
+   <children>
+      <Label layoutX="270.0" layoutY="22.0" text="Customer Management">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <TableView layoutX="16.0" layoutY="63.0" prefHeight="153.0" prefWidth="770.0">
+        <columns>
+          <TableColumn fx:id="colcustID" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="colcustTitle" prefWidth="75.0" text="Title" />
+            <TableColumn fx:id="colcustName" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="colcustDOB" prefWidth="75.0" text="DOB" />
+            <TableColumn fx:id="colcustSalary" prefWidth="75.0" text="Salary" />
+            <TableColumn fx:id="colcustAddress" prefWidth="165.0" text="Address" />
+            <TableColumn fx:id="colcustCity" prefWidth="75.0" text="City" />
+            <TableColumn fx:id="colcustProvince" prefWidth="75.0" text="Province" />
+            <TableColumn fx:id="colcustPostalcode" text="PostalCode" />
+        </columns>
+      </TableView>
+      <Label layoutX="86.0" layoutY="238.0" prefHeight="14.0" prefWidth="21.0" text="ID">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="86.0" layoutY="264.0" prefHeight="19.0" prefWidth="34.0" text="Title">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="86.0" layoutY="292.0" prefHeight="19.0" prefWidth="42.0" text="Name">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="86.0" layoutY="318.0" prefHeight="19.0" prefWidth="42.0" text="DOB">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="86.0" layoutY="345.0" prefHeight="19.0" prefWidth="42.0" text="Salary">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="86.0" layoutY="371.0" prefHeight="19.0" prefWidth="53.0" text="Address">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="86.0" layoutY="398.0" prefHeight="19.0" prefWidth="53.0" text="City">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="86.0" layoutY="426.0" prefHeight="19.0" prefWidth="53.0" text="Province">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="86.0" layoutY="452.0" prefHeight="19.0" prefWidth="80.0" text="PostalCode">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="txtcustid" layoutX="181.0" layoutY="238.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
+      <JFXTextArea fx:id="txtcustname" layoutX="181.0" layoutY="292.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
+      <JFXTextArea fx:id="txtcustdob" layoutX="181.0" layoutY="318.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
+      <JFXTextArea fx:id="txtcustsalary" layoutX="181.0" layoutY="345.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
+      <JFXTextArea fx:id="txtcustaddress" layoutX="181.0" layoutY="371.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
+      <JFXTextArea fx:id="txtcustcity" layoutX="181.0" layoutY="398.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
+      <JFXTextArea fx:id="txtcustpostalcode" layoutX="181.0" layoutY="452.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
+      <JFXButton fx:id="btnaddcust" layoutX="533.0" layoutY="251.0" onAction="#btnaddcustOnaction" prefHeight="28.0" prefWidth="165.0" text="Add">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnupdatecust" layoutX="533.0" layoutY="305.0" onAction="#btnupdatecustOnaction" prefHeight="28.0" prefWidth="165.0" text="Update">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btndeletecust" layoutX="533.0" layoutY="367.0" onAction="#btndeletecustOnaction" prefHeight="28.0" prefWidth="165.0" text="Delete">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnViewcust" layoutX="533.0" layoutY="422.0" onAction="#btnViewcustOnaction" prefHeight="28.0" prefWidth="165.0" text="View">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </JFXButton>
+      <JFXComboBox fx:id="combotitle" layoutX="181.0" layoutY="262.0" prefHeight="25.0" prefWidth="119.0" />
+      <JFXComboBox fx:id="comboprovince" layoutX="181.0" layoutY="423.0" prefHeight="25.0" prefWidth="119.0" />
+   </children>
+</AnchorPane>
