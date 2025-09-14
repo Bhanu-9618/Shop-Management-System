@@ -9,15 +9,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.Customer;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class CustomerManagementController implements Initializable {
@@ -74,7 +75,7 @@ public class CustomerManagementController implements Initializable {
     private JFXTextArea txtcustcity;
 
     @FXML
-    private JFXTextArea txtcustdob;
+    private DatePicker custDob;
 
     @FXML
     private JFXTextArea txtcustid;
@@ -92,19 +93,113 @@ public class CustomerManagementController implements Initializable {
     private TableView<Customer> tblcustmanagement;
 
     public void btnaddcustOnaction(ActionEvent event) {
+
+        String custid = txtcustid.getText().trim();
+        String title = combotitle.getValue();
+        String name = txtcustname.getText().trim();
+        LocalDate dob = custDob.getValue();
+        String salary = txtcustsalary.getText().trim();
+        String address = txtcustaddress.getText().trim();
+        String city = txtcustcity.getText().trim();
+        String province = comboprovince.getValue();
+        String postalcode = txtcustpostalcode.getText().trim();
+
+        if ((custid.isEmpty()) || (title==null) || (name.isEmpty()) || (dob==null) || (salary.isEmpty() ) || (address.isEmpty() ) || (city.isEmpty()) || (province==null) || (postalcode.isEmpty())){
+
+            System.out.println("fill all details!");
+
+        }else {
+
+            Connection connection = null;
+            try {
+                connection = DBConnection.getInstance().getConnection();
+                String SQL = "INSERT INTO customer VALUES(?,?,?,?,?,?,?,?,?)";
+                PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
+                preparedStatement.setObject(1, custid);
+                preparedStatement.setObject(2, title);
+                preparedStatement.setObject(3, name);
+                preparedStatement.setObject(4, dob);
+                preparedStatement.setObject(5, salary);
+                preparedStatement.setObject(6, address);
+                preparedStatement.setObject(7, city);
+                preparedStatement.setObject(8, province);
+                preparedStatement.setObject(9, postalcode);
+
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        btnViewcustOnaction(event);
+
     }
 
     public void btnupdatecustOnaction(ActionEvent event) {
+
+        String custid = txtcustid.getText().trim();
+        String title = combotitle.getValue();
+        String name = txtcustname.getText().trim();
+        LocalDate dob = custDob.getValue();
+        String salary = txtcustsalary.getText().trim();
+        String address = txtcustaddress.getText().trim();
+        String city = txtcustcity.getText().trim();
+        String province = comboprovince.getValue();
+        String postalcode = txtcustpostalcode.getText().trim();
+
+        if ((custid.isEmpty()) || (title==null) || (name.isEmpty()) || (dob==null) || (salary.isEmpty() ) || (address.isEmpty() ) || (city.isEmpty()) || (province==null) || (postalcode.isEmpty())){
+
+            System.out.println("fill all details!");
+
+        }else {
+
+            Connection connection = null;
+            try {
+                connection = DBConnection.getInstance().getConnection();
+                String SQL = "UPDATE customer SET CustTitle = ?, CustName = ?, DOB = ?, salary = ?, CustAddress = ?, City = ?, Province = ?, PostalCode = ? WHERE CustID = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
+
+                preparedStatement.setObject(1, title);
+                preparedStatement.setObject(2, name);
+                preparedStatement.setObject(3, dob);
+                preparedStatement.setObject(4, salary);
+                preparedStatement.setObject(5, address);
+                preparedStatement.setObject(6, city);
+                preparedStatement.setObject(7, province);
+                preparedStatement.setObject(8, postalcode);
+                preparedStatement.setObject(9, custid);
+
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        btnViewcustOnaction(event);
     }
 
     public void btndeletecustOnaction(ActionEvent event) {
+
+        String custid = txtcustid.getText();
+
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            String SQL = "DELETE FROM customer WHERE CustID = ?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
+            preparedStatement.setObject(1, custid);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        btnViewcustOnaction(event);
     }
 
     public void btnViewcustOnaction(ActionEvent event) {
-    }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
 
         ObservableList<Customer> customerInfos = FXCollections.observableArrayList();
 
@@ -145,6 +240,12 @@ public class CustomerManagementController implements Initializable {
         colcustPostalcode.setCellValueFactory(new PropertyValueFactory<>("postalcode"));
 
         tblcustmanagement.setItems(customerInfos);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        btnViewcustOnaction(new ActionEvent());
 
         ObservableList<String> titles = FXCollections.observableArrayList(
                 "Mr",
