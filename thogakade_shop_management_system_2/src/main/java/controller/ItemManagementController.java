@@ -12,12 +12,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Item;
-
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class ItemManagementController implements Initializable {
@@ -50,7 +46,7 @@ public class ItemManagementController implements Initializable {
     private TableColumn<?, ?> colunitprice;
 
     @FXML
-    private JFXTextArea qtyonhand;
+    private JFXTextArea txtqtyonhand;
 
     @FXML
     private TableView<Item> tblitemmanagement;
@@ -68,19 +64,93 @@ public class ItemManagementController implements Initializable {
     private JFXTextArea txtunitprice;
 
     public void btnadditemOnaction(ActionEvent event) {
+
+        String itemcode = txtitemcode.getText().trim();
+        String description = txtdescription.getText().trim();
+        String packsize = txtpacksize.getText().trim();
+        String unitprice = txtunitprice.getText().trim();
+        String qtyonhand = txtqtyonhand.getText().trim();
+
+        if (itemcode.isEmpty() | description.isEmpty() | packsize.isEmpty() | unitprice.isEmpty() | qtyonhand.isEmpty()) {
+
+            System.out.println("Fill all details!");
+        } else {
+
+            try {
+                Connection connection = DBConnection.getInstance().getConnection();
+                String SQL = "INSERT INTO item VALUES(?,?,?,?,?)";
+                PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
+                preparedStatement.setObject(1, itemcode);
+                preparedStatement.setObject(2, description);
+                preparedStatement.setObject(3, packsize);
+                preparedStatement.setObject(4, unitprice);
+                preparedStatement.setObject(5, qtyonhand);
+
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        btnviewitemOnaction(event);
     }
 
     public void btnupdateitemOnaction(ActionEvent event) {
+
+        String itemcode = txtitemcode.getText().trim();
+        String description = txtdescription.getText().trim();
+        String packsize = txtpacksize.getText().trim();
+        String unitprice = txtunitprice.getText().trim();
+        String qtyonhand = txtqtyonhand.getText().trim();
+
+        if ((itemcode.isEmpty()) || (description.isEmpty()) || (packsize.isEmpty()) || (unitprice.isEmpty()) || (qtyonhand.isEmpty() )){
+
+            System.out.println("fill all details!");
+
+        }else {
+
+            Connection connection = null;
+            try {
+                connection = DBConnection.getInstance().getConnection();
+                String SQL = "UPDATE item SET Description = ?, PackSize = ?, UnitPrice = ?, QtyOnHand = ? WHERE ItemCode = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
+
+                preparedStatement.setObject(1, description );
+                preparedStatement.setObject(2, packsize);
+                preparedStatement.setObject(3, unitprice);
+                preparedStatement.setObject(4, qtyonhand);
+                preparedStatement.setObject(5, itemcode);
+
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        btnviewitemOnaction(event);
     }
 
     public void btndeleteitemOnaction(ActionEvent event) {
+
+        String itemcode = txtitemcode.getText();
+
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            String SQL = "DELETE FROM item WHERE ItemCode = ?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
+            preparedStatement.setObject(1, itemcode);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        btnviewitemOnaction(event);
     }
 
     public void btnviewitemOnaction(ActionEvent event) {
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
 
         ObservableList<Item> itemInfos = FXCollections.observableArrayList();
 
@@ -113,5 +183,12 @@ public class ItemManagementController implements Initializable {
         colqtyonhand.setCellValueFactory(new PropertyValueFactory<>("qtyonhand"));
 
         tblitemmanagement.setItems(itemInfos);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        btnviewitemOnaction(new ActionEvent());
+
     }
 }

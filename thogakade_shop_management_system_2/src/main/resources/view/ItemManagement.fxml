@@ -48,7 +48,7 @@
       <JFXTextArea fx:id="txtitemcode" layoutX="128.0" layoutY="239.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
       <JFXTextArea fx:id="txtdescription" layoutX="128.0" layoutY="265.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
       <JFXTextArea fx:id="txtpacksize" layoutX="128.0" layoutY="292.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
-      <JFXTextArea fx:id="qtyonhand" layoutX="128.0" layoutY="346.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
+      <JFXTextArea fx:id="txtqtyonhand" layoutX="128.0" layoutY="346.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
       <Label layoutX="41.0" layoutY="320.0" prefHeight="19.0" prefWidth="67.0" text="UnitPrice">
          <font>
             <Font name="System Bold" size="13.0" />
