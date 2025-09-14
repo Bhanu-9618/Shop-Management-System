@@ -2,12 +2,25 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
+import db.DBConnection;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import model.Item;
 
-public class ItemManagementController {
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
+public class ItemManagementController implements Initializable {
 
     @FXML
     private JFXButton btnadditem;
@@ -40,7 +53,7 @@ public class ItemManagementController {
     private JFXTextArea qtyonhand;
 
     @FXML
-    private TableView<?> tblitemmanagement;
+    private TableView<Item> tblitemmanagement;
 
     @FXML
     private JFXTextArea txtdescription;
@@ -64,5 +77,41 @@ public class ItemManagementController {
     }
 
     public void btnviewitemOnaction(ActionEvent event) {
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        ObservableList<Item> itemInfos = FXCollections.observableArrayList();
+
+        try {
+            String SQL = "Select * from item;";
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+
+                Item item = new Item(
+                        resultSet.getString("ItemCode"),
+                        resultSet.getString("Description"),
+                        resultSet.getString("PackSize"),
+                        resultSet.getDouble("UnitPrice"),
+                        resultSet.getInt("QtyOnHand")
+                );
+
+                itemInfos.add(item);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        colcode.setCellValueFactory(new PropertyValueFactory<>("itemcode"));
+        coldescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colpacksize.setCellValueFactory(new PropertyValueFactory<>("packsize"));
+        colunitprice.setCellValueFactory(new PropertyValueFactory<>("unitprice"));
+        colqtyonhand.setCellValueFactory(new PropertyValueFactory<>("qtyonhand"));
+
+        tblitemmanagement.setItems(itemInfos);
     }
 }
