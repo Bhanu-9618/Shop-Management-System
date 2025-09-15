@@ -56,5 +56,12 @@ public class MainWindowController {
     }
 
     public void orderdetailmanagebtnOnaction(ActionEvent event) {
+
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/OrderDetailManagement.fxml"))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage.show();
     }
 }

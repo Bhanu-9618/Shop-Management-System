@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrderDetailManagementController">
+   <children>
+      <Label layoutX="159.0" layoutY="14.0" text="Order Detail Management">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblorderdetailmanagement" layoutX="149.0" layoutY="58.0" prefHeight="153.0" prefWidth="302.0">
+         <columns>
+            <TableColumn fx:id="colorderid" prefWidth="75.0" text="OrderID" />
+            <TableColumn fx:id="colorderid1" prefWidth="75.0" text="ItemCode" />
+            <TableColumn fx:id="colcustid" prefWidth="75.0" text="OrderQty" />
+            <TableColumn fx:id="colcustid1" prefWidth="75.0" text="Discount" />
+         </columns>
+      </TableView>
+      <Label layoutX="79.0" layoutY="240.0" prefHeight="19.0" prefWidth="67.0" text="OrderID">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="79.0" layoutY="266.0" prefHeight="19.0" prefWidth="80.0" text="ItemCode">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="79.0" layoutY="293.0" prefHeight="19.0" prefWidth="67.0" text="OrderQty">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="txtorderid" layoutX="166.0" layoutY="240.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
+      <JFXTextArea fx:id="txtitemcode" layoutX="166.0" layoutY="266.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
+      <JFXTextArea fx:id="txtorderqty" layoutX="166.0" layoutY="293.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
+      <Label layoutX="79.0" layoutY="321.0" prefHeight="19.0" prefWidth="67.0" text="Discount">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="txtdiscount" layoutX="166.0" layoutY="321.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="216.0" />
+      <JFXButton fx:id="btnupdate" layoutX="404.0" layoutY="266.0" onAction="#btnupdateOnaction" prefHeight="12.0" prefWidth="128.0" text="Update">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btndelete" layoutX="404.0" layoutY="302.0" onAction="#btndeleteOnaction" prefHeight="12.0" prefWidth="128.0" text="Delete">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnadd" layoutX="404.0" layoutY="231.0" onAction="#btnaddOnaction" prefHeight="12.0" prefWidth="128.0" text="Add">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
