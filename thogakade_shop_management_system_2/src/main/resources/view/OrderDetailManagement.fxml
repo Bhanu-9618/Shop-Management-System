@@ -19,9 +19,9 @@
       <TableView fx:id="tblorderdetailmanagement" layoutX="149.0" layoutY="58.0" prefHeight="153.0" prefWidth="302.0">
          <columns>
             <TableColumn fx:id="colorderid" prefWidth="75.0" text="OrderID" />
-            <TableColumn fx:id="colorderid1" prefWidth="75.0" text="ItemCode" />
-            <TableColumn fx:id="colcustid" prefWidth="75.0" text="OrderQty" />
-            <TableColumn fx:id="colcustid1" prefWidth="75.0" text="Discount" />
+            <TableColumn fx:id="colitemcode" prefWidth="75.0" text="ItemCode" />
+            <TableColumn fx:id="colorderqty" prefWidth="75.0" text="OrderQty" />
+            <TableColumn fx:id="coldiscount" prefWidth="75.0" text="Discount" />
          </columns>
       </TableView>
       <Label layoutX="79.0" layoutY="240.0" prefHeight="19.0" prefWidth="67.0" text="OrderID">
