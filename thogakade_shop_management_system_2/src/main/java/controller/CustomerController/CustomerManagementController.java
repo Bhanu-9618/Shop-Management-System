@@ -1,9 +1,8 @@
-package controller;
+package controller.CustomerController;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
-import db.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,11 +14,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Customer;
 import java.net.URL;
-import java.sql.*;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class CustomerManagementController implements Initializable {
+
+    CustomerControllerService customerControllerService = new CustomerController();
 
     @FXML
     private JFXButton btnaddcust;
@@ -102,27 +102,7 @@ public class CustomerManagementController implements Initializable {
         if ((custid.isEmpty()) || (title==null) || (name.isEmpty()) || (dob==null) || (salary.isEmpty() ) || (address.isEmpty() ) || (city.isEmpty()) || (province==null) || (postalcode.isEmpty())){
             System.out.println("fill all details!");
         }else {
-            Connection connection = null;
-            try {
-                connection = DBConnection.getInstance().getConnection();
-                String SQL = "INSERT INTO customer VALUES(?,?,?,?,?,?,?,?,?)";
-                PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
-                preparedStatement.setObject(1, custid);
-                preparedStatement.setObject(2, title);
-                preparedStatement.setObject(3, name);
-                preparedStatement.setObject(4, dob);
-                preparedStatement.setObject(5, salary);
-                preparedStatement.setObject(6, address);
-                preparedStatement.setObject(7, city);
-                preparedStatement.setObject(8, province);
-                preparedStatement.setObject(9, postalcode);
-
-                preparedStatement.executeUpdate();
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            customerControllerService.AddCustomer( custid , title,  name, dob, salary, address, city, province, postalcode);
         }
         view();
     }
@@ -142,27 +122,7 @@ public class CustomerManagementController implements Initializable {
         if ((custid.isEmpty()) || (title==null) || (name.isEmpty()) || (dob==null) || (salary.isEmpty() ) || (address.isEmpty() ) || (city.isEmpty()) || (province==null) || (postalcode.isEmpty())){
             System.out.println("fill all details!");
         }else {
-            Connection connection = null;
-            try {
-                connection = DBConnection.getInstance().getConnection();
-                String SQL = "UPDATE customer SET CustTitle = ?, CustName = ?, DOB = ?, salary = ?, CustAddress = ?, City = ?, Province = ?, PostalCode = ? WHERE CustID = ?";
-                PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
-                preparedStatement.setObject(1, title);
-                preparedStatement.setObject(2, name);
-                preparedStatement.setObject(3, dob);
-                preparedStatement.setObject(4, salary);
-                preparedStatement.setObject(5, address);
-                preparedStatement.setObject(6, city);
-                preparedStatement.setObject(7, province);
-                preparedStatement.setObject(8, postalcode);
-                preparedStatement.setObject(9, custid);
-
-                preparedStatement.executeUpdate();
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+        customerControllerService.UpdateCustomer(custid , title,  name, dob, salary, address, city, province, postalcode);
         }
         view();
     }
@@ -170,18 +130,7 @@ public class CustomerManagementController implements Initializable {
     public void btndeletecustOnaction(ActionEvent event) {
 
         String custid = txtcustid.getText();
-
-        try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            String SQL = "DELETE FROM customer WHERE CustID = ?;";
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
-            preparedStatement.setObject(1, custid);
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        customerControllerService.DeleteCustomer(custid);
         view();
     }
 
@@ -189,30 +138,7 @@ public class CustomerManagementController implements Initializable {
 
         ObservableList<Customer> customerInfos = FXCollections.observableArrayList();
 
-        try {
-            String SQL = "Select * from customer;";
-            Connection connection = DBConnection.getInstance().getConnection();
-            PreparedStatement  preparedStatement = connection.prepareStatement(SQL);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-
-                Customer customer = new Customer(
-                        resultSet.getString("CustID"),
-                        resultSet.getString("CustTitle"),
-                        resultSet.getString("CustName"),
-                        resultSet.getDate("DOB"),
-                        resultSet.getDouble("salary"),
-                        resultSet.getString("CustAddress"),
-                        resultSet.getString("City"),
-                        resultSet.getString("Province"),
-                        resultSet.getString("PostalCode")
-                );
-                customerInfos.add(customer);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        customerControllerService.ViewCustomers(customerInfos);
 
         colcustID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colcustTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
