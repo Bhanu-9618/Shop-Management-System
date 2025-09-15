@@ -55,12 +55,86 @@ public class OrderManagementController implements Initializable {
 
 
     public void btnplaceorderOnaction(ActionEvent event) {
+
+        String orderid = txtorderid.getText().trim();
+        String orderdate = String.valueOf(dateorderdate.getValue());
+        String custid = txtcustid.getText().trim();
+
+        if (orderid.isEmpty() | orderdate.isEmpty() | custid.isEmpty()) {
+
+            System.out.println("Fill all details!");
+        } else {
+
+            try {
+                Connection connection = DBConnection.getInstance().getConnection();
+                String SQL = "INSERT INTO orders VALUES(?,?,?)";
+                PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
+                preparedStatement.setObject(1, orderid);
+                preparedStatement.setObject(2, orderdate);
+                preparedStatement.setObject(3, custid);
+
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        view();
     }
 
     public void btnupdateOnaction(ActionEvent event) {
+
+        String orderid = txtorderid.getText().trim();
+        String orderdate = String.valueOf(dateorderdate.getValue());
+        String custid = txtcustid.getText().trim();
+
+        if (orderid.isEmpty() | orderdate.isEmpty() | custid.isEmpty()) {
+
+            System.out.println("Fill all details!");
+        } else {
+
+            try {
+                Connection connection = DBConnection.getInstance().getConnection();
+                String SQL = "UPDATE orders SET OrderDate = ?, CustID = ? WHERE OrderID = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
+                preparedStatement.setObject(1, orderdate);
+                preparedStatement.setObject(2, custid);
+                preparedStatement.setObject(3, orderid);
+
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        view();
     }
 
     public void btndeleteOnaction(ActionEvent event) {
+
+        String orderid = txtorderid.getText().trim();
+
+        if (orderid.isEmpty()) {
+
+            System.out.println("Input OrderID!");
+        } else {
+
+            try {
+                Connection connection = DBConnection.getInstance().getConnection();
+                String SQL = "DELETE FROM orders WHERE OrderID = ?;";
+                PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
+                preparedStatement.setObject(1, orderid);
+
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        view();
     }
 
     public void view() {
