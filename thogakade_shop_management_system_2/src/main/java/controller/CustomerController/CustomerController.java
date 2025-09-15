@@ -3,7 +3,6 @@ package controller.CustomerController;
 import db.DBConnection;
 import javafx.collections.ObservableList;
 import model.Customer;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -60,11 +59,9 @@ public class CustomerController implements CustomerControllerService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public void DeleteCustomer(String custid){
-
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             String SQL = "DELETE FROM customer WHERE CustID = ?;";
@@ -79,7 +76,6 @@ public class CustomerController implements CustomerControllerService {
     }
 
     public void ViewCustomers(ObservableList<Customer> customerInfos ){
-
         try {
             String SQL = "Select * from customer;";
             Connection connection = DBConnection.getInstance().getConnection();
@@ -99,7 +95,6 @@ public class CustomerController implements CustomerControllerService {
                         resultSet.getString("Province"),
                         resultSet.getString("PostalCode")
                 );
-
                 customerInfos.add(customer);
             }
         } catch (SQLException e) {

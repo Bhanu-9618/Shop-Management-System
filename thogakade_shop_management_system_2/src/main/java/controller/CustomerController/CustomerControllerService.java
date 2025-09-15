@@ -2,7 +2,6 @@ package controller.CustomerController;
 
 import javafx.collections.ObservableList;
 import model.Customer;
-
 import java.time.LocalDate;
 
 public interface CustomerControllerService {
