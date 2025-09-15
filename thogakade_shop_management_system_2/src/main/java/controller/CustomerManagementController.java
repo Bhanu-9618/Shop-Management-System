@@ -9,12 +9,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import model.Customer;
 import java.net.URL;
 import java.sql.*;
@@ -22,9 +20,6 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class CustomerManagementController implements Initializable {
-
-    @FXML
-    private JFXButton btnViewcust;
 
     @FXML
     private JFXButton btnaddcust;
@@ -105,11 +100,8 @@ public class CustomerManagementController implements Initializable {
         String postalcode = txtcustpostalcode.getText().trim();
 
         if ((custid.isEmpty()) || (title==null) || (name.isEmpty()) || (dob==null) || (salary.isEmpty() ) || (address.isEmpty() ) || (city.isEmpty()) || (province==null) || (postalcode.isEmpty())){
-
             System.out.println("fill all details!");
-
         }else {
-
             Connection connection = null;
             try {
                 connection = DBConnection.getInstance().getConnection();
@@ -132,8 +124,7 @@ public class CustomerManagementController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
-        btnViewcustOnaction(event);
-
+        view();
     }
 
     public void btnupdatecustOnaction(ActionEvent event) {
@@ -149,17 +140,13 @@ public class CustomerManagementController implements Initializable {
         String postalcode = txtcustpostalcode.getText().trim();
 
         if ((custid.isEmpty()) || (title==null) || (name.isEmpty()) || (dob==null) || (salary.isEmpty() ) || (address.isEmpty() ) || (city.isEmpty()) || (province==null) || (postalcode.isEmpty())){
-
             System.out.println("fill all details!");
-
         }else {
-
             Connection connection = null;
             try {
                 connection = DBConnection.getInstance().getConnection();
                 String SQL = "UPDATE customer SET CustTitle = ?, CustName = ?, DOB = ?, salary = ?, CustAddress = ?, City = ?, Province = ?, PostalCode = ? WHERE CustID = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
 
                 preparedStatement.setObject(1, title);
                 preparedStatement.setObject(2, name);
@@ -177,7 +164,7 @@ public class CustomerManagementController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
-        btnViewcustOnaction(event);
+        view();
     }
 
     public void btndeletecustOnaction(ActionEvent event) {
@@ -195,11 +182,10 @@ public class CustomerManagementController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        btnViewcustOnaction(event);
+        view();
     }
 
-    public void btnViewcustOnaction(ActionEvent event) {
-
+    public void view() {
 
         ObservableList<Customer> customerInfos = FXCollections.observableArrayList();
 
@@ -222,7 +208,6 @@ public class CustomerManagementController implements Initializable {
                         resultSet.getString("Province"),
                         resultSet.getString("PostalCode")
                 );
-
                 customerInfos.add(customer);
             }
         } catch (SQLException e) {
@@ -245,7 +230,7 @@ public class CustomerManagementController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        btnViewcustOnaction(new ActionEvent());
+        view();
 
         ObservableList<String> titles = FXCollections.observableArrayList(
                 "Mr",

@@ -28,9 +28,6 @@ public class ItemManagementController implements Initializable {
     private JFXButton btnupdateitem;
 
     @FXML
-    private JFXButton btnviewitem;
-
-    @FXML
     private TableColumn<?, ?> colcode;
 
     @FXML
@@ -72,10 +69,8 @@ public class ItemManagementController implements Initializable {
         String qtyonhand = txtqtyonhand.getText().trim();
 
         if (itemcode.isEmpty() | description.isEmpty() | packsize.isEmpty() | unitprice.isEmpty() | qtyonhand.isEmpty()) {
-
             System.out.println("Fill all details!");
         } else {
-
             try {
                 Connection connection = DBConnection.getInstance().getConnection();
                 String SQL = "INSERT INTO item VALUES(?,?,?,?,?)";
@@ -93,7 +88,7 @@ public class ItemManagementController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
-        btnviewitemOnaction(event);
+        view();
     }
 
     public void btnupdateitemOnaction(ActionEvent event) {
@@ -105,9 +100,7 @@ public class ItemManagementController implements Initializable {
         String qtyonhand = txtqtyonhand.getText().trim();
 
         if ((itemcode.isEmpty()) || (description.isEmpty()) || (packsize.isEmpty()) || (unitprice.isEmpty()) || (qtyonhand.isEmpty() )){
-
             System.out.println("fill all details!");
-
         }else {
 
             Connection connection = null;
@@ -115,7 +108,6 @@ public class ItemManagementController implements Initializable {
                 connection = DBConnection.getInstance().getConnection();
                 String SQL = "UPDATE item SET Description = ?, PackSize = ?, UnitPrice = ?, QtyOnHand = ? WHERE ItemCode = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
 
                 preparedStatement.setObject(1, description );
                 preparedStatement.setObject(2, packsize);
@@ -129,7 +121,7 @@ public class ItemManagementController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
-        btnviewitemOnaction(event);
+        view();
     }
 
     public void btndeleteitemOnaction(ActionEvent event) {
@@ -147,10 +139,10 @@ public class ItemManagementController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        btnviewitemOnaction(event);
+        view();
     }
 
-    public void btnviewitemOnaction(ActionEvent event) {
+    public void view() {
 
         ObservableList<Item> itemInfos = FXCollections.observableArrayList();
 
@@ -169,7 +161,6 @@ public class ItemManagementController implements Initializable {
                         resultSet.getDouble("UnitPrice"),
                         resultSet.getInt("QtyOnHand")
                 );
-
                 itemInfos.add(item);
             }
         } catch (SQLException e) {
@@ -187,8 +178,6 @@ public class ItemManagementController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        btnviewitemOnaction(new ActionEvent());
-
+        view();
     }
 }

@@ -13,7 +13,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Order;
-
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -61,10 +60,8 @@ public class OrderManagementController implements Initializable {
         String custid = txtcustid.getText().trim();
 
         if (orderid.isEmpty() | orderdate.isEmpty() | custid.isEmpty()) {
-
             System.out.println("Fill all details!");
         } else {
-
             try {
                 Connection connection = DBConnection.getInstance().getConnection();
                 String SQL = "INSERT INTO orders VALUES(?,?,?)";
@@ -90,10 +87,8 @@ public class OrderManagementController implements Initializable {
         String custid = txtcustid.getText().trim();
 
         if (orderid.isEmpty() | orderdate.isEmpty() | custid.isEmpty()) {
-
             System.out.println("Fill all details!");
         } else {
-
             try {
                 Connection connection = DBConnection.getInstance().getConnection();
                 String SQL = "UPDATE orders SET OrderDate = ?, CustID = ? WHERE OrderID = ?";
@@ -117,10 +112,8 @@ public class OrderManagementController implements Initializable {
         String orderid = txtorderid.getText().trim();
 
         if (orderid.isEmpty()) {
-
             System.out.println("Input OrderID!");
         } else {
-
             try {
                 Connection connection = DBConnection.getInstance().getConnection();
                 String SQL = "DELETE FROM orders WHERE OrderID = ?;";
@@ -153,9 +146,7 @@ public class OrderManagementController implements Initializable {
                         resultSet.getString("OrderID"),
                         resultSet.getDate("OrderDate"),
                         resultSet.getString("CustID")
-
                 );
-
                 orderInfos.add(order);
             }
         } catch (SQLException e) {
@@ -171,7 +162,6 @@ public class OrderManagementController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         view();
     }
 }

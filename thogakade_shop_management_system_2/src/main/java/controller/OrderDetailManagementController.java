@@ -65,10 +65,8 @@ public class OrderDetailManagementController implements Initializable {
         String  discount = txtdiscount.getText().trim();
 
         if (orderid.isEmpty() | itemcode.isEmpty() | orderqty.isEmpty() | discount.isEmpty()) {
-
             System.out.println("Fill all details!");
         } else {
-
             try {
                 Connection connection = DBConnection.getInstance().getConnection();
                 String SQL = "UPDATE orderdetail SET  OrderQty = ?, Discount = ? WHERE OrderID = ? AND ItemCode = ?";
@@ -94,10 +92,8 @@ public class OrderDetailManagementController implements Initializable {
         String itemcode = txtitemcode.getText().trim();
 
         if (orderid.isEmpty() | itemcode.isEmpty()) {
-
             System.out.println("Input OrderID and ItemCode!");
         } else {
-
             try {
                 Connection connection = DBConnection.getInstance().getConnection();
                 String SQL = "DELETE FROM orderdetail WHERE OrderID = ? AND ItemCode = ?;";
@@ -123,10 +119,8 @@ public class OrderDetailManagementController implements Initializable {
         String  discount = txtdiscount.getText().trim();
 
         if (orderid.isEmpty() | itemcode.isEmpty() | orderqty.isEmpty() | discount.isEmpty()) {
-
             System.out.println("Fill all details!");
         } else {
-
             try {
                 Connection connection = DBConnection.getInstance().getConnection();
                 String SQL = "INSERT INTO orderdetail VALUES(?,?,?,?)";
@@ -163,9 +157,7 @@ public class OrderDetailManagementController implements Initializable {
                         resultSet.getString("ItemCode"),
                         resultSet.getInt("OrderQty"),
                         resultSet.getInt("Discount")
-
                 );
-
                 orderdetailInfos.add(orderDetail);
             }
         } catch (SQLException e) {
