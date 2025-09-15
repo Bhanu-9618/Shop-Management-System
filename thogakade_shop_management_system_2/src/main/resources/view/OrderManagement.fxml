@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrderManagementController">
+   <children>
+      <Label layoutX="194.0" layoutY="14.0" text="Order Management">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblordermanagement" layoutX="144.0" layoutY="54.0" prefHeight="153.0" prefWidth="313.0">
+         <columns>
+            <TableColumn fx:id="colorderid" prefWidth="75.0" text="OrderID" />
+            <TableColumn fx:id="colorderdate" prefWidth="165.0" text="OrderDate" />
+            <TableColumn fx:id="colcustid" prefWidth="75.0" text="CustID" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="btnplaceorder" layoutX="424.0" layoutY="222.0" onAction="#btnplaceorderOnaction" prefHeight="12.0" prefWidth="128.0" text="Place Order">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnupdate" layoutX="424.0" layoutY="260.0" onAction="#btnupdateOnaction" prefHeight="12.0" prefWidth="128.0" text="Update">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btndelete" layoutX="424.0" layoutY="298.0" onAction="#btndeleteOnaction" prefHeight="12.0" prefWidth="128.0" text="Delete">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="83.0" layoutY="228.0" prefHeight="22.0" prefWidth="84.0" text="OrderID">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="83.0" layoutY="266.0" prefHeight="22.0" prefWidth="84.0" text="OrderDate">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="83.0" layoutY="304.0" prefHeight="22.0" prefWidth="84.0" text="CustID">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="txtorderid" layoutX="194.0" layoutY="232.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="174.0" />
+      <JFXTextArea fx:id="txtcustid" layoutX="194.0" layoutY="308.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="19.0" prefWidth="174.0" />
+      <DatePicker fx:id="dateorderdate" layoutX="194.0" layoutY="267.0" />
+   </children>
+</AnchorPane>
