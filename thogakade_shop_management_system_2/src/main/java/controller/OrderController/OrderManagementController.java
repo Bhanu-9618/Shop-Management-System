@@ -1,8 +1,7 @@
-package controller;
+package controller.OrderController;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
-import db.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,13 +13,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Order;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class OrderManagementController implements Initializable {
+
+    OrderControllerService orderControllerService = new OrderController();
 
     @FXML
     private JFXButton btndelete;
@@ -52,7 +49,6 @@ public class OrderManagementController implements Initializable {
     @FXML
     private JFXTextArea txtorderid;
 
-
     public void btnplaceorderOnaction(ActionEvent event) {
 
         String orderid = txtorderid.getText().trim();
@@ -62,20 +58,7 @@ public class OrderManagementController implements Initializable {
         if (orderid.isEmpty() | orderdate.isEmpty() | custid.isEmpty()) {
             System.out.println("Fill all details!");
         } else {
-            try {
-                Connection connection = DBConnection.getInstance().getConnection();
-                String SQL = "INSERT INTO orders VALUES(?,?,?)";
-                PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
-                preparedStatement.setObject(1, orderid);
-                preparedStatement.setObject(2, orderdate);
-                preparedStatement.setObject(3, custid);
-
-                preparedStatement.executeUpdate();
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+           orderControllerService.PlaceOrder(orderid,orderdate,custid);
         }
         view();
     }
@@ -89,20 +72,7 @@ public class OrderManagementController implements Initializable {
         if (orderid.isEmpty() | orderdate.isEmpty() | custid.isEmpty()) {
             System.out.println("Fill all details!");
         } else {
-            try {
-                Connection connection = DBConnection.getInstance().getConnection();
-                String SQL = "UPDATE orders SET OrderDate = ?, CustID = ? WHERE OrderID = ?";
-                PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
-                preparedStatement.setObject(1, orderdate);
-                preparedStatement.setObject(2, custid);
-                preparedStatement.setObject(3, orderid);
-
-                preparedStatement.executeUpdate();
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            orderControllerService.UpdateOrder(orderid,orderdate,custid);
         }
         view();
     }
@@ -114,18 +84,7 @@ public class OrderManagementController implements Initializable {
         if (orderid.isEmpty()) {
             System.out.println("Input OrderID!");
         } else {
-            try {
-                Connection connection = DBConnection.getInstance().getConnection();
-                String SQL = "DELETE FROM orders WHERE OrderID = ?;";
-                PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
-                preparedStatement.setObject(1, orderid);
-
-                preparedStatement.executeUpdate();
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+           orderControllerService.DeleteOrder(orderid);
         }
         view();
     }
@@ -134,24 +93,7 @@ public class OrderManagementController implements Initializable {
 
         ObservableList<Order> orderInfos = FXCollections.observableArrayList();
 
-        try {
-            String SQL = "Select * from orders;";
-            Connection connection = DBConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-
-                Order order = new Order(
-                        resultSet.getString("OrderID"),
-                        resultSet.getDate("OrderDate"),
-                        resultSet.getString("CustID")
-                );
-                orderInfos.add(order);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        orderControllerService.ViewOrders(orderInfos);
 
         colorderid.setCellValueFactory(new PropertyValueFactory<>("orderid"));
         colorderdate.setCellValueFactory(new PropertyValueFactory<>("orderdate"));

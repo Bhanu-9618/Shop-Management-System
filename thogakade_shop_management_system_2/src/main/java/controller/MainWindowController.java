@@ -22,11 +22,9 @@ public class MainWindowController {
     @FXML
     private JFXButton ordermanagebtn;
 
-
     Stage stage = new Stage();
 
     public void custmanagebtnOnaction(javafx.event.ActionEvent event) {
-
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/CustomerManagement.fxml"))));
         } catch (IOException e) {
@@ -36,7 +34,6 @@ public class MainWindowController {
     }
 
     public void itemmanagebtnOnaction(ActionEvent event) {
-
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/ItemManagement.fxml"))));
         } catch (IOException e) {
@@ -46,7 +43,6 @@ public class MainWindowController {
     }
 
     public void ordermanagebtnOnaction(ActionEvent event) {
-
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/OrderManagement.fxml"))));
         } catch (IOException e) {
@@ -56,7 +52,6 @@ public class MainWindowController {
     }
 
     public void orderdetailmanagebtnOnaction(ActionEvent event) {
-
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/OrderDetailManagement.fxml"))));
         } catch (IOException e) {
