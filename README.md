@@ -6,16 +6,19 @@ A **desktop-based shop management system** built using **JavaFX** and **MySQL**,
 
 ## Features
 
+- **Customer Management**
+  - Add, update, delete, and view customers
+    
 - **Item Management**
   - Add, update, delete, and view items
   - Automatically updates stock quantities when orders are placed  
 
-- **Customer Management**
-  - Add, update, delete, and view customers
-
 - **Order Management**
   - Place orders for multiple items
-  - Automatically reduces stock quantity after order 
+  - Automatically reduces stock quantity after order
+
+- **Order Detail Management**
+  - Add, update, or delete order details
 
 - **Architecture & Design**
   - **MVC Pattern**: Clear separation between UI (FXML), controllers, and database logic
