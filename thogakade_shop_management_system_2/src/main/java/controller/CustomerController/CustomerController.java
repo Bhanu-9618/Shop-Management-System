@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 public class CustomerController implements CustomerControllerService {
 
+    @Override
     public void AddCustomer(String custid ,String title, String name,LocalDate dob,String salary,String address, String city,String province, String postalcode){
 
         Connection connection = null;
@@ -36,6 +37,7 @@ public class CustomerController implements CustomerControllerService {
         }
     }
 
+    @Override
     public void UpdateCustomer(String custid ,String title, String name,LocalDate dob,String salary,String address, String city,String province, String postalcode){
 
         Connection connection = null;
@@ -61,6 +63,7 @@ public class CustomerController implements CustomerControllerService {
         }
     }
 
+    @Override
     public void DeleteCustomer(String custid){
         try {
             Connection connection = DBConnection.getInstance().getConnection();
@@ -75,6 +78,7 @@ public class CustomerController implements CustomerControllerService {
         }
     }
 
+    @Override
     public void ViewCustomers(ObservableList<Customer> customerInfos ){
         try {
             String SQL = "Select * from customer;";

@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 public class ItemController implements ItemControllerService{
 
+    @Override
     public void AddItem(String itemcode , String description, String packsize, String unitprice, String qtyonhand){
         try {
             Connection connection = DBConnection.getInstance().getConnection();
@@ -29,6 +30,7 @@ public class ItemController implements ItemControllerService{
         }
     }
 
+    @Override
     public void UpdateItem(String itemcode , String description, String packsize, String unitprice, String qtyonhand){
 
         Connection connection = null;
@@ -48,7 +50,7 @@ public class ItemController implements ItemControllerService{
             throw new RuntimeException(e);
         }
     }
-
+    @Override
     public void DeleteItem(String itemcode){
         try {
             Connection connection = DBConnection.getInstance().getConnection();
@@ -63,6 +65,7 @@ public class ItemController implements ItemControllerService{
         }
     }
 
+    @Override
     public void ViewItems(ObservableList<Item> itemInfos){
 
         try {
